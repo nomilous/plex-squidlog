@@ -22,8 +22,8 @@ accumulatorInstruction =
         #
 
         query:
-            refresh: 1
-            event: 'query:accumulator:parameters'
+            interval: 1
+            get: 'parameters'
         
 
 #
@@ -116,3 +116,7 @@ local = plex.start
 
                 accumulators[ id ].disconnect_at = new Date()
                 showAccumulators()
+
+        receive 'event:query', (payload) -> 
+
+            console.log 'accumulator at id: %s, query:', payload.id, payload.query
