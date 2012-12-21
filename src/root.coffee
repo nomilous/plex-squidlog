@@ -16,10 +16,19 @@ workerPort = 3001                    # TODO: argv
 # `accumulators` Stores the comms callbacks to for each
 #                attached udp_server. (tier1)
 # 
-#
+# `accumulators.id.connected_at` Set on connect
+# 
+# `accumulators.id.disconnected_at` Set on disconnect
+# 
+# TODO: - cull disconnected...
+#         respawn will have new pid therefore new id
+# 
+#       - uptime metrix (high frequency respawns generally 
+#         mean code was pushed with unforseen bug)
+# 
 
 accumulators = {}
-
+showAccumulators = -> console.log "\n\n\nACCUMULATORS:", JSON.stringify accumulators, null, 2
 
 
 local = plex.start
@@ -69,7 +78,15 @@ local = plex.start
                 receive: receive
                 send:    send
 
+            accumulators[ id ].connect_at = new Date()
+            showAccumulators()
 
 
+            #
+            # subscribe to THIS accumulator disconnecting
+            #
 
-            console.log "SHOWING ACCUMULATORS:", accumulators
+            receive 'disconnect', ->
+
+                accumulators[ id ].disconnect_at = new Date()
+                showAccumulators()
