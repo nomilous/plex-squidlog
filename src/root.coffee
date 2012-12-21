@@ -9,8 +9,10 @@
 
 
 plex       = require 'plex'
-uplinkUri  = 'http://localhost:3000' # TODO: argv
-workerPort = 3001                    # TODO: argv
+uplinkUri  = 'http://localhost:2020' # TODO: argv
+workerPort = 6001                    # TODO: argv
+
+console.log "start"
 
 #
 # `accumulators` Stores the comms callbacks to for each

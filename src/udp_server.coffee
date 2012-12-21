@@ -12,7 +12,7 @@
 # 
 
 plex      = require 'plex'
-uplinkUri = 'http://localhost:3001'
+uplinkUri = 'http://localhost:6001'
 udpPort   = 12345
 
 local = plex.start 
