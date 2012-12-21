@@ -28,3 +28,17 @@ local = plex.start
         adaptor: 'socket.io' 
         uri: uplinkUri
 
+
+
+    protocol: (receive, send) -> 
+
+        receive 'connect', -> 
+
+            #
+            # Register with local root
+            #
+
+            send 'event:new:udp_server', 
+
+                id: process.pid
+
