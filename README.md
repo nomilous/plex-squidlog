@@ -120,9 +120,9 @@ service plex-squidlog-root start|stop|reload
 
 `/etc/init/plex-squidlog-accumulate.conf`
 
-Is almost s/identical/thesame/g at the root service, [sed](http://en.wikipedia.org/wiki/Sed) is handy for this sort of thing
+Is almost s/identical/thesame/g as the root service, [sed](http://en.wikipedia.org/wiki/Sed) is handy for this sort of thing
 
-```bash
+```sed
 sed s/root/accumulate/g < /etc/init/plex-squidlog-root.conf > /etc/init/plex-squidlog-accumulate.conf
 
 ```
