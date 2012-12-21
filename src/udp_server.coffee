@@ -11,6 +11,12 @@
 # Usage: udp_server <parent_uri> <udp_port>
 # 
 
+
+
+#
+# TODO: retry connect, dont let the deamon die
+#
+
 plex      = require 'plex'
 uplinkUri = 'http://localhost:6001'
 udpPort   = 12345

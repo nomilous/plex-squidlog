@@ -116,5 +116,15 @@ exec start-stop-daemon --start \
 service plex-squidlog-root start|stop|reload
 ```
 
+### Accumulate Init
+
+`/etc/init/plex-squidlog-accumulate.conf`
+
+Is almost s/identical/thesame/g at the root service, [sed](http://en.wikipedia.org/wiki/Sed) is handy for this sort of thing
+
+```bash
+sed s/root/accumulate/g < /etc/init/plex-squidlog-root.conf > /etc/init/plex-squidlog-accumulate.conf
+
+```
 
 
