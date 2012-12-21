@@ -32,8 +32,8 @@ Define a log filter to identify events from the squid servers. <br />
 
 ### Destination
 
-Define a destination toward which to forward the event identified by the filter. <br />
-* There may already be a df_squid writing to fd at something like `/var/log/squid/...` *
+Define a destination toward which to forward the event identified by the filter. <br /> 
+*There may already be a df_squid writing to fd at something like `/var/log/squid/...` *
 
 
 ```bash
@@ -44,8 +44,8 @@ Define a destination toward which to forward the event identified by the filter.
 
 ### Log rule
 
-Define/modify the `log` declaration to send to the new destination.
-* The may already be one *
+Define/modify the `log` declaration to send to the new destination. <br />
+*The may already be one*
 
 ```bash 
 
