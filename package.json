@@ -9,7 +9,9 @@
       "email": "nomilous@gmail.com"
     }
   ],
-  "dependencies": {},
+  "dependencies": {
+    "plex": "0.0.1"
+  },
   "devDependencies": {},
   "keywords": [
     "proxy",
