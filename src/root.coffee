@@ -12,7 +12,10 @@ plex       = require 'plex'
 uplinkUri  = 'http://localhost:2020' # TODO: argv
 workerPort = 6001                    # TODO: argv
 
-console.log "start"
+logStream  = 
+    instruction: 'listen'
+    mode: 'squidlog'
+    port: 12345
 
 #
 # `accumulators` Stores the comms callbacks to for each
@@ -65,7 +68,7 @@ local = plex.start
 
     protocol: (receive, send) -> 
 
-        receive 'event:new:udp_server', (payload) -> 
+        receive 'event:udp_server:register', (payload) -> 
 
             #
             # Handle registering udp_server
@@ -81,6 +84,18 @@ local = plex.start
                 send:    send
 
             accumulators[ id ].connect_at = new Date()
+
+            #
+            # tell the [Accumulator](accumulator.html) where to listen
+            # 
+            # Note: This currently only support one squidlog stream,
+            #       starting multiple accumulators will collide with
+            #       addressinuse when going to listen.
+            #       
+            #  
+
+            send 'event:udp_server:instruction', logStream
+
             showAccumulators()
 
 

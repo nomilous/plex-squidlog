@@ -35,7 +35,6 @@ local = plex.start
         uri: uplinkUri
 
 
-
     protocol: (receive, send) -> 
 
         receive 'connect', -> 
@@ -44,6 +43,12 @@ local = plex.start
             # Register with local root
             #
 
-            send 'event:new:udp_server', 
+            send 'event:udp_server:register', 
 
+                hostname: (require 'os').hostname()
                 id: process.pid
+
+
+        receive 'event:udp_server:instruction', (payload) -> 
+
+            console.log "instruction:", payload 
