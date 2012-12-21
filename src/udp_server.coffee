@@ -1,20 +1,6 @@
-module.exports = class UdpServer
+Handler = require './handler'
 
-    constructor: (@recieve, @send) -> 
-
-        console.log "UdpServer() with:", @recieve, @send
-
-    instruction: (opts) -> 
-
-        console.log "instruction:", opts
-
-        #
-        # Call the function named in 
-        # opts.instruction
-        #
-
-        this[opts.function] opts 
-
+module.exports = class UdpServer extends Handler
 
     forward: (opts) ->
 

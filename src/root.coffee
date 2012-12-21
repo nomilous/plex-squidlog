@@ -15,14 +15,16 @@ workerPort = 6001                    # TODO: argv
 accumulatorInstruction = 
     handler: 'udp_server'
     instruction: 
-        function: 'forward'
-        opts: 
-            mode: 'balanced'
-            from:
-                port: 12345
-            to:
-                destinations: {}
 
+        #
+        # Accumulator call for instruction update 
+        # every 1 second
+        #
+
+        query:
+            refresh: 1
+            event: 'query:accumulator:parameters'
+        
 
 #
 # `accumulators` Stores the comms callbacks for each
