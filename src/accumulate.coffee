@@ -19,7 +19,7 @@
 
 plex      = require 'plex'
 uplinkUri = 'http://localhost:6001'
-Handler   = require './udp_server' 
+handler   = undefined
 
 
 listen = (opts) -> 
@@ -50,24 +50,41 @@ local = plex.start
             # Register with local root
             #
 
-            send 'event:udp_server:register', 
+            send 'event:accumulator:register', 
 
                 hostname: (require 'os').hostname()
                 id: process.pid
 
 
-        receive 'event:udp_server:instruction', (instruction) -> 
+        receive 'event:accumulator:instruction', (playload) -> 
+
+            if handler
+
+                #
+                # TODO: already have a hander, uplink must 
+                #       have died and recovered
+                # 
+                #       need to tell uplink this side is
+                #       still handling what it was handling
+                #       before
+                #       
+                #       after makin sure that's true
+                #
+
+                console.log "UPLINK RECOVERED"
+                return
+                
 
             #
             # Initialise an instruction handler with the 
             # uplink callbacks.
             # 
 
-            handler = new Handler receive, send
+            handler = new (require "./#{ playload.handler }") receive, send unless handler
 
             #
             # Send in the instruction
             #
 
-            handler.instruction instruction
+            handler.instruction playload.instruction
 

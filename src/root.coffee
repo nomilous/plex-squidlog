@@ -12,13 +12,20 @@ plex       = require 'plex'
 uplinkUri  = 'http://localhost:2020' # TODO: argv
 workerPort = 6001                    # TODO: argv
 
-logStream  = 
-    instruction: 'listen'
-    mode: 'squidlog'
-    port: 12345
+accumulatorInstruction = 
+    handler: 'udp_server'
+    instruction: 
+        function: 'forward'
+        opts: 
+            mode: 'balanced'
+            from:
+                port: 12345
+            to:
+                destinations: {}
+
 
 #
-# `accumulators` Stores the comms callbacks to for each
+# `accumulators` Stores the comms callbacks for each
 #                attached udp_server. (tier1)
 # 
 # `accumulators.id.connected_at` Set on connect
@@ -68,7 +75,7 @@ local = plex.start
 
     protocol: (receive, send) -> 
 
-        receive 'event:udp_server:register', (payload) -> 
+        receive 'event:accumulator:register', (payload) -> 
 
             #
             # Handle registering udp_server
@@ -94,7 +101,7 @@ local = plex.start
             #       
             #  
 
-            send 'event:udp_server:instruction', logStream
+            send 'event:accumulator:instruction', accumulatorInstruction
 
             showAccumulators()
 

@@ -8,4 +8,15 @@ module.exports = class UdpServer
 
         console.log "instruction:", opts
 
+        #
+        # Call the function named in 
+        # opts.instruction
+        #
+
+        this[opts.function] opts 
+
+
+    forward: (opts) ->
+
+        console.log "call to forward with:", opts 
 
