@@ -82,8 +82,8 @@ local = plex.start
             handler = new (require "./#{ playload.handler }") receive, send unless handler
 
             #
-            # Send in the instruction
+            # Send actions to the handler
             #
 
-            handler.instruction playload.instruction
+            handler.actions playload
 

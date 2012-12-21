@@ -14,7 +14,7 @@ workerPort = 6001                    # TODO: argv
 
 accumulatorInstruction = 
     handler: 'udp_server'
-    instruction: 
+    actions: 
 
         #
         # Accumulator call for instruction update 

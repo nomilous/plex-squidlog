@@ -4,8 +4,14 @@ module.exports = class Handler
 
         console.log "UdpServer() with:", @recieve, @send
 
-    instruction: (parameters) -> 
+    actions: (opts) -> 
 
-        console.log "instruction: ", parameters
+        for action of opts.actions
 
-        
+            console.log 'action:', action
+
+            @handle action, opts.actions[action]
+
+    handle: (action, params) -> 
+
+        console.log 'action:', action, params
